@@ -16,14 +16,14 @@
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
     <!-- <pre>
-      <code>
-        {{ tasks() | json }}
-      </code>
-    </pre> -->
+    <code>
+      {{ tasks() | json }}
+    </code>
+  </pre> -->
     <section class="main">
       <ul class="todo-list">
+        @for (task of tasksByFilter(); track task; let i = $index) {
         <li
-          *ngFor="let task of tasksByFilter(); index as i"
           (dblclick)="updateTaskEditingMode(i)"
           [class.editing]="task.editing"
           [class.completed]="task.completed"
@@ -44,15 +44,18 @@
             (keydown.enter)="updateTaskText(i, $event)"
           />
         </li>
+        }
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <footer class="footer" *ngIf="tasksByFilter().length > 0">
+    @if (tasksByFilter().length > 0) {
+    <footer class="footer">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count">
         <strong>{{ tasksByFilter().length }}</strong>
-        <span *ngIf="tasksByFilter().length === 1; else elseBlock"> item </span>
-        <ng-template #elseBlock> items </ng-template>
+        @if (tasksByFilter().length === 1) {
+        <span> item </span>
+        } @else { items }
       </span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
@@ -84,5 +87,6 @@
       <!-- Hidden if no completed items are left ↓ -->
       <button class="clear-completed">Clear completed</button>
     </footer>
+    }
   </div>
 </section>

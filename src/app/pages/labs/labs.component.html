@@ -1,3 +1,34 @@
+@if(name() === 'Cristian'){
+<div>Soy Cristian</div>
+}
+<hr />
+
+@if(name() === 'Cristian' && age > 18){
+<div>Soy Cristian y soy mayor de 18</div>
+} @else {
+<div>Soy Cristian y soy menor de 18</div>
+}
+<hr />
+
+<ul>
+  @for (task of tasks(); track task; let i = $index) {
+  <li>{{ i }} {{ task.title }}</li>
+  } @empty {
+  <li><strong>La lista esta vacia</strong></li>
+  }
+</ul>
+<hr />
+
+@switch (name()) { @case('Cristian'){
+<p>Yo soy Cristian</p>
+} @case('Nicolas'){
+<p>Yo soy Nicolas</p>
+}@case('Ana'){
+<p>Yo soy Ana</p>
+} @default {
+<p>No soy nadie</p>
+}}
+<hr />
 <input type="color" [formControl]="colorCtrl" />
 <p>color: {{ colorCtrl.value }}</p>
 <svg>

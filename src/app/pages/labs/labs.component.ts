@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,6 +11,21 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './labs.component.css',
 })
 export class LabsComponent {
+  name = signal('Ana');
+  age = 24;
+  tasks = signal([
+    {
+      id: Date.now(),
+      title: 'Instalar Angular',
+      completed: false,
+    },
+    {
+      id: Date.now(),
+      title: 'Crear Componentes',
+      completed: false,
+    },
+  ]);
+
   colorCtrl = new FormControl();
   widthCtrl = new FormControl('', {
     nonNullable: true,
